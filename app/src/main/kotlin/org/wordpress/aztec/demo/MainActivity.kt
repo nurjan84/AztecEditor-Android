@@ -659,7 +659,7 @@ open class MainActivity : AppCompatActivity(),
     override fun onRedo() {}
 
     private fun onCameraPhotoMediaOptionSelected() {
-        if (PermissionUtils.checkAndRequestCameraAndStoragePermissions(this, MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE)) {
+        /*if (PermissionUtils.checkAndRequestCameraAndStoragePermissions(this, MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE)) {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -682,7 +682,7 @@ open class MainActivity : AppCompatActivity(),
             if (intent.resolveActivity(packageManager) != null) {
                 startActivityForResult(intent, REQUEST_MEDIA_CAMERA_PHOTO)
             }
-        }
+        }*/
     }
 
     private fun onCameraVideoMediaOptionSelected() {
