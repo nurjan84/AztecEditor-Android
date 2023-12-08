@@ -426,7 +426,7 @@ class AztecToolbar : FrameLayout, IAztecToolbar, OnMenuItemClickListener {
     private fun initView(attrs: AttributeSet?) {
         val styles = context.obtainStyledAttributes(attrs, R.styleable.AztecToolbar, 0, R.style.AztecToolbarStyle)
         isAdvanced = styles.getBoolean(R.styleable.AztecToolbar_advanced, false)
-        isMediaToolbarAvailable = styles.getBoolean(R.styleable.AztecToolbar_mediaToolbarAvailable, true)
+        isMediaToolbarAvailable = styles.getBoolean(R.styleable.AztecToolbar_mediaToolbarAvailable, false)
 
         val toolbarBackgroundColor = styles.getColor(
                 R.styleable.AztecToolbar_toolbarBackgroundColor,

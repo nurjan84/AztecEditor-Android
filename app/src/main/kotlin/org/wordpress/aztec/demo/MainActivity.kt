@@ -53,6 +53,7 @@ import org.wordpress.aztec.plugins.BackgroundColorButton
 import org.wordpress.aztec.plugins.CssBackgroundColorPlugin
 import org.wordpress.aztec.plugins.CssUnderlinePlugin
 import org.wordpress.aztec.plugins.IMediaToolbarButton
+import org.wordpress.aztec.plugins.at_button.AtSymbolButton
 import org.wordpress.aztec.plugins.shortcodes.AudioShortcodePlugin
 import org.wordpress.aztec.plugins.shortcodes.CaptionShortcodePlugin
 import org.wordpress.aztec.plugins.shortcodes.VideoShortcodePlugin
@@ -66,6 +67,8 @@ import org.wordpress.aztec.plugins.wpcomments.toolbar.PageToolbarButton
 import org.wordpress.aztec.source.SourceViewEditText
 import org.wordpress.aztec.toolbar.AztecToolbar
 import org.wordpress.aztec.toolbar.IAztecToolbarClickListener
+import org.wordpress.aztec.toolbar.ToolbarAction
+import org.wordpress.aztec.toolbar.ToolbarItems
 import org.wordpress.aztec.util.AztecLog
 import org.xml.sax.Attributes
 import java.io.File
@@ -419,7 +422,14 @@ open class MainActivity : AppCompatActivity(),
         val visualEditor = findViewById<AztecText>(R.id.aztec)
         val sourceEditor = findViewById<SourceViewEditText>(R.id.source)
         val toolbar = findViewById<AztecToolbar>(R.id.formatting_toolbar)
-
+        val defaultBasicLayout = ToolbarItems.BasicLayout(
+                ToolbarAction.UNORDERED_LIST,
+                ToolbarAction.ORDERED_LIST,
+                ToolbarAction.BOLD,
+                ToolbarAction.ITALIC,
+                ToolbarAction.STRIKETHROUGH,
+        )
+        toolbar.setToolbarItems(defaultBasicLayout)
         visualEditor.enableSamsungPredictiveBehaviorOverride()
 
         visualEditor.externalLogger = object : AztecLog.ExternalLogger {
@@ -459,26 +469,29 @@ open class MainActivity : AppCompatActivity(),
             }
         })
 
+        toolbar.enableMediaMode(false)
         aztec = Aztec.with(visualEditor, sourceEditor, toolbar, this)
-                .setImageGetter(GlideImageLoader(this))
-                .setVideoThumbnailGetter(GlideVideoThumbnailLoader(this))
-                .setOnImeBackListener(this)
-                .setOnTouchListener(this)
-                .setHistoryListener(this)
-                .setOnImageTappedListener(this)
-                .setOnVideoTappedListener(this)
-                .setOnAudioTappedListener(this)
-                .addOnMediaDeletedListener(this)
-                .setOnVideoInfoRequestedListener(this)
-                .addPlugin(WordPressCommentsPlugin(visualEditor))
-                .addPlugin(MoreToolbarButton(visualEditor))
-                .addPlugin(PageToolbarButton(visualEditor))
-                .addPlugin(CaptionShortcodePlugin(visualEditor))
-                .addPlugin(VideoShortcodePlugin())
-                .addPlugin(AudioShortcodePlugin())
-                .addPlugin(HiddenGutenbergPlugin(visualEditor))
-                .addPlugin(galleryButton)
-                .addPlugin(cameraButton)
+                //.setImageGetter(GlideImageLoader(this))
+                //.setVideoThumbnailGetter(GlideVideoThumbnailLoader(this))
+                //.setOnImeBackListener(this)
+                //.setOnTouchListener(this)
+                //.setHistoryListener(this)
+                //.setOnImageTappedListener(this)
+                //.setOnVideoTappedListener(this)
+                //.setOnAudioTappedListener(this)
+                //.addOnMediaDeletedListener(this)
+                //.setOnVideoInfoRequestedListener(this)
+                //.addPlugin(WordPressCommentsPlugin(visualEditor))
+                //.addPlugin(MoreToolbarButton(visualEditor))
+                //.addPlugin(PageToolbarButton(visualEditor))
+                //.addPlugin(CaptionShortcodePlugin(visualEditor))
+                .addPlugin(AtSymbolButton(visualEditor))
+                //.addPlugin(VideoShortcodePlugin())
+                //.addPlugin(AudioShortcodePlugin())
+                //.addPlugin(HiddenGutenbergPlugin(visualEditor))
+                //.addPlugin(galleryButton)
+                //.addPlugin(cameraButton)
+
 
         // initialize the plugins, text & HTML
         if (!isRunningTest) {
@@ -492,11 +505,11 @@ open class MainActivity : AppCompatActivity(),
 
             aztec.visualEditor.setBackgroundSpanColor(ContextCompat.getColor(this, AztecR.color.blue_dark))
 
-            aztec.sourceEditor?.displayStyledAndFormattedHtml(EXAMPLE)
+            //aztec.sourceEditor?.displayStyledAndFormattedHtml(EXAMPLE)
 
-            aztec.addPlugin(CssUnderlinePlugin())
-            aztec.addPlugin(CssBackgroundColorPlugin())
-            aztec.addPlugin(BackgroundColorButton(visualEditor))
+            //aztec.addPlugin(CssUnderlinePlugin())
+            //aztec.addPlugin(CssBackgroundColorPlugin())
+            //aztec.addPlugin(BackgroundColorButton(visualEditor))
         }
 
         if (savedInstanceState == null) {
@@ -659,7 +672,7 @@ open class MainActivity : AppCompatActivity(),
     override fun onRedo() {}
 
     private fun onCameraPhotoMediaOptionSelected() {
-        /*if (PermissionUtils.checkAndRequestCameraAndStoragePermissions(this, MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE)) {
+        if (PermissionUtils.checkAndRequestCameraAndStoragePermissions(this, MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE)) {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -682,7 +695,7 @@ open class MainActivity : AppCompatActivity(),
             if (intent.resolveActivity(packageManager) != null) {
                 startActivityForResult(intent, REQUEST_MEDIA_CAMERA_PHOTO)
             }
-        }*/
+        }
     }
 
     private fun onCameraVideoMediaOptionSelected() {

@@ -1,7 +1,7 @@
 plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
-    id "com.automattic.android.publish-to-s3"
+    //id "com.automattic.android.publish-to-s3"
 }
 
 android {
@@ -46,7 +46,7 @@ dependencies {
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
 }
 
-project.afterEvaluate {
+/*project.afterEvaluate {
     publishing {
         publications {
             WordPressCommentsPublication(MavenPublication) {
@@ -58,4 +58,4 @@ project.afterEvaluate {
             }
         }
    }
-}
+}*/

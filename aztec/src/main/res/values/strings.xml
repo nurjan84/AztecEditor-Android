@@ -38,6 +38,7 @@
     <string name="format_bar_description_html">HTML</string>
     <string name="format_bar_description_ellipsis_collapse">Collapse Toolbar</string>
     <string name="format_bar_description_ellipsis_expand">Expand Toolbar</string>
+    <string name="format_bar_description_at">/@ Symbol</string>
     <string name="visual_editor">Visual toolbarActionListener</string>
     <string name="image_thumbnail">Image thumbnail</string>
 

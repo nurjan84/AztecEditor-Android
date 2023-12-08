@@ -1,7 +1,7 @@
 plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
-    id "com.automattic.android.publish-to-s3"
+    //id "com.automattic.android.publish-to-s3"
 }
 
 android {
@@ -27,7 +27,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 }
 
-project.afterEvaluate {
+/*project.afterEvaluate {
     publishing {
         publications {
             GlideLoaderPublication(MavenPublication) {
@@ -39,4 +39,4 @@ project.afterEvaluate {
             }
         }
    }
-}
+}*/

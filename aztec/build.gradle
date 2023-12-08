@@ -1,17 +1,18 @@
 plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
-    id "com.automattic.android.publish-to-s3"
+    id "maven-publish"
 }
 
 android {
     namespace "org.wordpress.aztec"
 
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
+
+        minSdkVersion 23
+        targetSdkVersion 33
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -79,13 +80,21 @@ dependencies {
 project.afterEvaluate {
     publishing {
         publications {
-            AztecPublication(MavenPublication) {
+            release(MavenPublication) {
                 from components.release
-
-                groupId "org.wordpress"
+                groupId "io.dar.common"
                 artifactId "aztec"
-                // version is set by 'publish-to-s3' plugin
+                version '1.8.1'
             }
         }
-   }
+        repositories {
+            maven {
+                url = "https://nexus.dar.tech/repository/android/"
+                credentials {
+                    username (System.getenv("NEXUS_USER") != null ? System.getenv("NEXUS_USER") : NEXUS_USER)
+                    password (System.getenv("NEXUS_PASS") != null ? System.getenv("NEXUS_PASS") : NEXUS_PASS)
+                }
+            }
+        }
+    }
 }

@@ -1,5 +1,5 @@
 plugins {
-    id "com.android.library"
+    id "com.android.application"
     id "org.jetbrains.kotlin.android"
 }
 
@@ -9,7 +9,7 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
-        //applicationId "org.wordpress.aztec"
+        applicationId "org.wordpress.aztec"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
