@@ -89,6 +89,7 @@ project.afterEvaluate {
         }
         repositories {
             maven {
+                name = "Dar"
                 url = "https://nexus.dar.tech/repository/android/"
                 credentials {
                     username (System.getenv("NEXUS_USER") != null ? System.getenv("NEXUS_USER") : NEXUS_USER)
